@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/interest-point")
@@ -30,9 +31,21 @@ public class InterestPointController {
         return ResponseEntity.ok(interestPointService.findById(id));
     }
 
+
+
     @GetMapping()
     public ResponseEntity<List<InterestPoint>> getAllInterestPoints() {
         return ResponseEntity.ok(interestPointService.findAll());
     }
+
+    @PostMapping("/process-url")
+    public ResponseEntity<List<String>> getAccessibilities(@RequestBody Map<String, String> requestBody) {
+        String place = requestBody.get("place");
+        System.out.println("Nome: " + place);
+        return ResponseEntity.ok(interestPointService.findAccessibilities(place));
+    }
+
+
+
 
 }

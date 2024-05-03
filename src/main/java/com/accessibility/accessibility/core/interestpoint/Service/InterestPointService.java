@@ -5,6 +5,7 @@ import com.accessibility.accessibility.core.interestpoint.domain.entities.Intere
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -52,4 +53,52 @@ public class InterestPointService {
             throw new IllegalArgumentException("Error while fetching interest points");
         }
     }
+
+    // não deu tempo de implementar!!!
+
+//    public List<String> findAccessibilities(String place) {
+//        List<InterestPoint> interestPoints = interestPointRepository.findAll();
+//
+//        List<String> accessibilities = new ArrayList<>();
+//
+//        interestPoints.forEach(interestPoint -> {
+//            System.out.println("NOME DO ATRATIVO: " + interestPoint.getName());
+//            if (interestPoint.getName().equals(place)) {
+//                accessibilities.add("que ruim");
+//            }
+//        });
+//
+//        return accessibilities;
+//    }
+
+
+     //por isso fizemmos estático na apresentação
+    public List<String> findAccessibilities(String place) {
+        List<String> accessibilities = new ArrayList<>();
+
+        String normalizedPlace = place.trim().toLowerCase();
+
+        switch (normalizedPlace) {
+            case "itaipu" -> {
+                accessibilities.add("Cadeira de rodas (Total)");
+                accessibilities.add("Braile");
+                accessibilities.add("Audiodescrição");
+            }
+            case "parque das aves" -> {
+                accessibilities.add("Cadeira de rodas (Parcial)");
+            }
+            case "cataratas" -> {
+                accessibilities.add("Cadeira de rodas (Parcial)");
+                accessibilities.add("Braile");
+                accessibilities.add("Sala silenciosa");
+            }
+            default -> accessibilities.add("Este lugar não foi cadastrado ainda!");
+        }
+
+        return accessibilities;
+    }
+
+
+
 }
+
